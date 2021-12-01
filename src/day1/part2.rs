@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::io::{stdin, Read};
 
 fn process_input(input: &str) -> Vec<u16> {
@@ -16,13 +17,10 @@ fn collect_3_depths(data: Vec<u16>) -> Vec<u16> {
 
 fn compare_depths(data: Vec<u16>) -> u16 {
     data
-        .windows(2)
-        .fold(0, |acc, elem| {
-            if let [prev_depth, curr_depth] = elem {
-                if curr_depth > prev_depth { acc + 1 } else { acc }
-            } else {
-                acc
-            }
+        .iter()
+        .tuple_windows()
+        .fold(0, |acc, (prev_depth, curr_depth)| {
+            if curr_depth > prev_depth { acc + 1 } else { acc }
         })
 }
 
