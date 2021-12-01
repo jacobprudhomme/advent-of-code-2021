@@ -14,12 +14,11 @@ fn collect_3_depths(data: Vec<u16>) -> Vec<u16> {
         .collect()
 }
 
-fn compare_depths(data: Vec<u16>) -> u16 {
+fn compare_depths(data: Vec<u16>) -> usize {
     data
         .windows(2)
-        .fold(0, |acc, depths| {
-            if depths[1] > depths[0] { acc + 1 } else { acc }
-        })
+        .filter(|depths| depths[1] > depths[0])
+        .count()
 }
 
 fn main() {
