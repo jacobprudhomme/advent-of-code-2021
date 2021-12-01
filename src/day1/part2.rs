@@ -7,6 +7,13 @@ fn process_input(input: &str) -> Vec<u16> {
         .collect()
 }
 
+fn collect_3_depths(data: Vec<u16>) -> Vec<u16> {
+    data
+        .windows(3)
+        .map(|elem| elem.iter().sum())
+        .collect()
+}
+
 fn compare_depths(data: Vec<u16>) -> u16 {
     data
         .windows(2)
@@ -26,7 +33,7 @@ fn main() {
         .expect("Cannot read input");
     let data = process_input(&buffer);
 
-    let count = compare_depths(data);
+    let count = compare_depths(collect_3_depths(data));
 
     println!("{}", count);
 }
